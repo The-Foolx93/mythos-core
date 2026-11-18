@@ -1,0 +1,10 @@
+{
+    "player": "Alexander the Grey",
+    "level": 1,
+    "active_quest": "Configure Local Git Repository",
+    "inventory": [
+        "Python 3.13.5",
+        "Bash Shell",
+        "Markdown Codex"
+    ]
+}
