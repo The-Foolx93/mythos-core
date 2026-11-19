@@ -1,6 +1,6 @@
 {
     "player": "Alexander the Grey",
-    "level": 6,
+    "level": 7,
     "active_quest": "Push mythos-core to GitHub Remote",
     "inventory": [
         "Python 3.13.5",
@@ -17,9 +17,10 @@
         "[2026-11-18 17:02] QUEST SET: Push mythos-core to GitHub Remote",
         "[2026-11-18 19:14] PRUNED LOG: Removed 4 entries (kept 5, +20 XP, +2 Linux/CLI)",
         "[2026-11-18 19:18] BUNDLE: NOTEBOOK_BUNDLE.md (395 lines scanned, +49 XP, +6 Python)",
-        "[2026-11-18 19:38] BUNDLE: NOTEBOOK_BUNDLE.md (403 lines scanned, +50 XP, +6 Notebook, +1 Python)"
+        "[2026-11-18 19:38] BUNDLE: NOTEBOOK_BUNDLE.md (403 lines scanned, +50 XP, +6 Notebook, +1 Python)",
+        "[2026-11-18 19:40] COMMIT: feat: add log/prune commands and split Notebook/Python bundle XP (7f/180L, +90 XP, +12 Git)"
     ],
-    "xp": 44,
+    "xp": 34,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)"
@@ -27,7 +28,7 @@
     "skills": {
         "Python": 42,
         "Linux/CLI": 12,
-        "Git": 17,
+        "Git": 29,
         "Notebook": 6
     }
 }
