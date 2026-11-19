@@ -1,11 +1,11 @@
-
 import json
 import os
 import sys
 from datetime import datetime
 
-STATE_FILE = "system_state.json"
-CODEX_FILE = "CODEX.md"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATE_FILE = os.path.join(BASE_DIR, "system_state.json")
+CODEX_FILE = os.path.join(BASE_DIR, "CODEX.md")
 
 def load_state():
     if os.path.exists(STATE_FILE):

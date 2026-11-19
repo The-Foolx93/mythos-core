@@ -1,13 +1,15 @@
 {
     "player": "Alexander the Grey",
-    "level": 1,
+    "level": 2,
     "active_quest": "Automate Local Knowledge Pipeline",
     "inventory": [
         "Python 3.13.5",
         "Bash Shell",
-        "Markdown Codex"
+        "Markdown Codex",
+        "Global Shell Alias"
     ],
     "history": [
-        "[2026-11-17 18:32] QUEST SET: Automate Local Knowledge Pipeline"
+        "[2026-11-17 18:32] QUEST SET: Automate Local Knowledge Pipeline",
+        "[2026-11-18 16:20] ITEM ACQUIRED: Global Shell Alias (Lvl 2)"
     ]
 }
