@@ -1,7 +1,7 @@
 {
     "player": "Alexander the Grey",
     "level": 3,
-    "active_quest": "Automate Local Knowledge Pipeline",
+    "active_quest": "Build NotebookLM Source Bundler",
     "inventory": [
         "Python 3.13.5",
         "Bash Shell",
@@ -12,6 +12,17 @@
     "history": [
         "[2026-11-17 18:32] QUEST SET: Automate Local Knowledge Pipeline",
         "[2026-11-18 16:20] ITEM ACQUIRED: Global Shell Alias (Lvl 2)",
-        "[2026-11-18 16:22] ITEM ACQUIRED: Git v2.47.3 (Lvl 3)"
-    ]
+        "[2026-11-18 16:22] ITEM ACQUIRED: Git v2.47.3 (Lvl 3)",
+        "[2026-11-18 16:31] QUEST COMPLETED: Automate Local Knowledge Pipeline (+50 XP, +10 Python)",
+        "[2026-11-18 16:31] QUEST SET: Build NotebookLM Source Bundler"
+    ],
+    "xp": 50,
+    "completed_quests": [
+        "Automate Local Knowledge Pipeline (2026-11-18 16:31)"
+    ],
+    "skills": {
+        "Python": 20,
+        "Linux/CLI": 10,
+        "Git": 5
+    }
 }
