@@ -1,6 +1,6 @@
 {
     "player": "Alexander the Grey",
-    "level": 10,
+    "level": 11,
     "active_quest": "None",
     "inventory": [
         "Python 3.13.5",
@@ -25,9 +25,12 @@
         "[2026-11-18 22:28] BUNDLE: NOTEBOOK_BUNDLE.md (417 lines scanned, +50 XP, +6 Notebook, +1 Python)",
         "[2026-11-18 22:28] COMMIT: feat(ui): add ANSI styling, XP bar, and box-drawing status view (3f/84L, +53 XP, +8 Git)",
         "[2026-11-18 22:31] QUEST COMPLETED: Upgrade mythos-core UI with ANSI colors and box-drawing (+62 XP, +13 Python)",
-        "[2026-11-18 23:12] BUNDLE: NOTEBOOK_BUNDLE.md (478 lines scanned, +53 XP, +6 Notebook, +1 Python)"
+        "[2026-11-18 23:12] BUNDLE: NOTEBOOK_BUNDLE.md (478 lines scanned, +53 XP, +6 Notebook, +1 Python)",
+        "[2026-11-18 23:12] COMMIT: fix(ui): align box borders and wrap long status lines (5f/199L, +80 XP, +12 Git)",
+        "[2026-11-18 23:34] SKILL TRAINED: Git 10 +10 (+25 XP)",
+        "[2026-11-18 23:35] BUNDLE: NOTEBOOK_BUNDLE.md (483 lines scanned, +54 XP, +7 Notebook, +1 Python)"
     ],
-    "xp": 28,
+    "xp": 87,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
@@ -35,9 +38,10 @@
         "Upgrade mythos-core UI with ANSI colors and box-drawing (2026-11-18 22:31)"
     ],
     "skills": {
-        "Python": 57,
+        "Python": 58,
         "Linux/CLI": 12,
-        "Git": 51,
-        "Notebook": 18
+        "Git": 63,
+        "Notebook": 25,
+        "Git 10": 10
     }
 }
