@@ -1,28 +1,29 @@
 # MythOS Core — NotebookLM Source Bundle
-*Generated: 2026-11-18 22:28*
-*Operator: Alexander the Grey | Level: 8*
+*Generated: 2026-11-18 23:12*
+*Operator: Alexander the Grey | Level: 9*
 
 ## 1. System Codex (CODEX.md)
 
 # MythOS Core — System Codex
-*Last Synchronized: 2026-11-18 22:27:57*
+*Last Synchronized: 2026-11-18 22:31:47*
 
 ## Operator Status
 - **Identity:** Alexander the Grey
-- **System Level:** 8
-- **XP Progress:** 10 / 100 XP to next level
-- **Active Quest:** Upgrade mythos-core UI with ANSI colors and box-drawing
+- **System Level:** 9
+- **XP Progress:** 75 / 100 XP to next level
+- **Active Quest:** None
 
 ## Skills
-- **Git:** Rank 43
-- **Python:** Rank 42
+- **Python:** Rank 56
+- **Git:** Rank 51
 - **Linux/CLI:** Rank 12
-- **Notebook:** Rank 6
+- **Notebook:** Rank 12
 
 ## Completed Quests
 - [x] Automate Local Knowledge Pipeline (2026-11-18 16:31)
 - [x] Build NotebookLM Source Bundler (2026-11-18 17:02)
 - [x] Push mythos-core to GitHub Remote (2026-11-18 21:54)
+- [x] Upgrade mythos-core UI with ANSI colors and box-drawing (2026-11-18 22:31)
 
 ## Acquired Modules & Inventory
 - [x] Python 3.13.5
@@ -44,6 +45,9 @@
 - `[2026-11-18 19:47] COMMIT: chore: sync codex and system state before push (2f/18L, +26 XP, +4 Git)`
 - `[2026-11-18 21:54] QUEST COMPLETED: Push mythos-core to GitHub Remote (+50 XP, +10 Git)`
 - `[2026-11-18 22:27] QUEST SET: Upgrade mythos-core UI with ANSI colors and box-drawing`
+- `[2026-11-18 22:28] BUNDLE: NOTEBOOK_BUNDLE.md (417 lines scanned, +50 XP, +6 Notebook, +1 Python)`
+- `[2026-11-18 22:28] COMMIT: feat(ui): add ANSI styling, XP bar, and box-drawing status view (3f/84L, +53 XP, +8 Git)`
+- `[2026-11-18 22:31] QUEST COMPLETED: Upgrade mythos-core UI with ANSI colors and box-drawing (+62 XP, +13 Python)`
 
 
 ---
@@ -53,8 +57,8 @@
 ```json
 {
     "player": "Alexander the Grey",
-    "level": 8,
-    "active_quest": "Upgrade mythos-core UI with ANSI colors and box-drawing",
+    "level": 9,
+    "active_quest": "None",
     "inventory": [
         "Python 3.13.5",
         "Bash Shell",
@@ -74,19 +78,23 @@
         "[2026-11-18 19:40] COMMIT: feat: add log/prune commands and split Notebook/Python bundle XP (7f/180L, +90 XP, +12 Git)",
         "[2026-11-18 19:47] COMMIT: chore: sync codex and system state before push (2f/18L, +26 XP, +4 Git)",
         "[2026-11-18 21:54] QUEST COMPLETED: Push mythos-core to GitHub Remote (+50 XP, +10 Git)",
-        "[2026-11-18 22:27] QUEST SET: Upgrade mythos-core UI with ANSI colors and box-drawing"
+        "[2026-11-18 22:27] QUEST SET: Upgrade mythos-core UI with ANSI colors and box-drawing",
+        "[2026-11-18 22:28] BUNDLE: NOTEBOOK_BUNDLE.md (417 lines scanned, +50 XP, +6 Notebook, +1 Python)",
+        "[2026-11-18 22:28] COMMIT: feat(ui): add ANSI styling, XP bar, and box-drawing status view (3f/84L, +53 XP, +8 Git)",
+        "[2026-11-18 22:31] QUEST COMPLETED: Upgrade mythos-core UI with ANSI colors and box-drawing (+62 XP, +13 Python)"
     ],
-    "xp": 10,
+    "xp": 75,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
-        "Push mythos-core to GitHub Remote (2026-11-18 21:54)"
+        "Push mythos-core to GitHub Remote (2026-11-18 21:54)",
+        "Upgrade mythos-core UI with ANSI colors and box-drawing (2026-11-18 22:31)"
     ],
     "skills": {
-        "Python": 42,
+        "Python": 56,
         "Linux/CLI": 12,
-        "Git": 43,
-        "Notebook": 6
+        "Git": 51,
+        "Notebook": 12
     }
 }
 ```
@@ -98,8 +106,10 @@
 ```python
 import json
 import os
+import re
 import subprocess
 import sys
+import textwrap
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -110,6 +120,22 @@ XP_PER_LEVEL = 100
 
 
 from log_tools import calc_prune_xp, print_log
+
+
+USE_COLOR = sys.stdout.isatty() and os.environ.get("NO_COLOR") is None
+ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
+
+def c(code: str, text: str) -> str:
+    return f"\033[{code}m{text}\033[0m" if USE_COLOR else text
+
+def vlen(text: str) -> int:
+    return len(ANSI_RE.sub("", text))
+
+def xp_bar(xp: int, cap: int = 100, width: int = 20) -> str:
+    pct = max(0.0, min(1.0, xp / cap)) if cap else 0.0
+    filled = round(pct * width)
+    bar = ("█" * filled) + ("░" * (width - filled))
+    return f"{c('1;32', bar)} {c('1;37', f'{xp}/{cap} XP')}"
 
 
 def default_state():
@@ -258,9 +284,44 @@ def calc_bundle_xp():
 
 
 def print_status(state):
-    print("\n=== [ ACTIVE SYSTEM STATE ] ===")
-    print(json.dumps(state, indent=4))
-    print("===============================\n")
+    player = state.get("player") or "Operator"
+    level = state.get("level", 1)
+    xp = state.get("xp", 0)
+    quest = state.get("active_quest") or "None"
+    skills = state.get("skills", {})
+    inventory = state.get("inventory", [])
+    w = 64
+
+    def emit_wrapped(prefix: str, body: str, color: str | None = None):
+        avail = max(12, w - vlen(prefix))
+        lines = textwrap.wrap(body, width=avail) or [""]
+        for idx, chunk in enumerate(lines):
+            head = prefix if idx == 0 else (" " * vlen(prefix))
+            styled = c(color, chunk) if color else chunk
+            line = f"{head}{styled}"
+            pad = max(0, w - vlen(line))
+            print(f"{c('1;32', '│')} {line}{' ' * pad} {c('1;32', '│')}")
+
+    print()
+    print(c("1;32", "┌" + "─" * (w + 2) + "┐"))
+    title = c("1;36", "MYTHOS-CORE SYSTEM STATUS")
+    tpad = max(0, w - vlen(title))
+    lpad = tpad // 2
+    rpad = tpad - lpad
+    print(f"{c('1;32', '│')} {' ' * lpad}{title}{' ' * rpad} {c('1;32', '│')}")
+    print(c("1;32", "├" + "─" * (w + 2) + "┤"))
+    emit_wrapped("Operator: ", f"{player}  |  LVL {level}", "1;37")
+    emit_wrapped("Progress: ", f"{'█' * round(max(0.0, min(1.0, xp / 100)) * 20)}{'░' * (20 - round(max(0.0, min(1.0, xp / 100)) * 20))} {xp}/100 XP", "1;32")
+    emit_wrapped("Quest   : ", str(quest), "1;37")
+    if isinstance(skills, dict) and skills:
+        s_text = ", ".join(f"{k}: {v}" for k, v in skills.items())
+        emit_wrapped("Skills  : ", s_text, "0;32")
+    if isinstance(inventory, list) and inventory:
+        inv_text = ", ".join(str(item) for item in inventory)
+        emit_wrapped("Gear    : ", inv_text, "0;36")
+    print(c("1;32", "└" + "─" * (w + 2) + "┘"))
+    print()
+
 
 
 def print_usage():
