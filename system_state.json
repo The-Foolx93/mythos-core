@@ -1,6 +1,6 @@
 {
     "player": "Alexander the Grey",
-    "level": 11,
+    "level": 12,
     "active_quest": "None",
     "inventory": [
         "Python 3.13.5",
@@ -28,9 +28,10 @@
         "[2026-11-18 23:12] BUNDLE: NOTEBOOK_BUNDLE.md (478 lines scanned, +53 XP, +6 Notebook, +1 Python)",
         "[2026-11-18 23:12] COMMIT: fix(ui): align box borders and wrap long status lines (5f/199L, +80 XP, +12 Git)",
         "[2026-11-18 23:34] SKILL TRAINED: Git 10 +10 (+25 XP)",
-        "[2026-11-18 23:35] BUNDLE: NOTEBOOK_BUNDLE.md (483 lines scanned, +54 XP, +7 Notebook, +1 Python)"
+        "[2026-11-18 23:35] BUNDLE: NOTEBOOK_BUNDLE.md (483 lines scanned, +54 XP, +7 Notebook, +1 Python)",
+        "[2026-11-18 23:35] COMMIT: feat(state): boost Git skill and reach Level 11 (3f/74L, +49 XP, +7 Git)"
     ],
-    "xp": 87,
+    "xp": 36,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
@@ -40,7 +41,7 @@
     "skills": {
         "Python": 58,
         "Linux/CLI": 12,
-        "Git": 63,
+        "Git": 70,
         "Notebook": 25,
         "Git 10": 10
     }
