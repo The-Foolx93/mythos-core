@@ -1,25 +1,26 @@
 # MythOS Core — NotebookLM Source Bundle
-*Generated: 2026-11-18 16:56*
-*Operator: Alexander the Grey | Level: 3*
+*Generated: 2026-11-18 19:38*
+*Operator: Alexander the Grey | Level: 5*
 
 ## 1. System Codex (CODEX.md)
 
 # MythOS Core — System Codex
-*Last Synchronized: 2026-11-18 16:31:45*
+*Last Synchronized: 2026-11-18 19:18:21*
 
 ## Operator Status
 - **Identity:** Alexander the Grey
-- **System Level:** 3
-- **XP Progress:** 50 / 100 XP to next level
-- **Active Quest:** Build NotebookLM Source Bundler
+- **System Level:** 5
+- **XP Progress:** 94 / 100 XP to next level
+- **Active Quest:** Push mythos-core to GitHub Remote
 
 ## Skills
-- **Python:** Rank 20
-- **Linux/CLI:** Rank 10
-- **Git:** Rank 5
+- **Python:** Rank 41
+- **Git:** Rank 17
+- **Linux/CLI:** Rank 12
 
 ## Completed Quests
 - [x] Automate Local Knowledge Pipeline (2026-11-18 16:31)
+- [x] Build NotebookLM Source Bundler (2026-11-18 17:02)
 
 ## Acquired Modules & Inventory
 - [x] Python 3.13.5
@@ -29,11 +30,13 @@
 - [x] Git v2.47.3
 
 ## Execution Log
-- `[2026-11-17 18:32] QUEST SET: Automate Local Knowledge Pipeline`
-- `[2026-11-18 16:20] ITEM ACQUIRED: Global Shell Alias (Lvl 2)`
-- `[2026-11-18 16:22] ITEM ACQUIRED: Git v2.47.3 (Lvl 3)`
-- `[2026-11-18 16:31] QUEST COMPLETED: Automate Local Knowledge Pipeline (+50 XP, +10 Python)`
 - `[2026-11-18 16:31] QUEST SET: Build NotebookLM Source Bundler`
+- `[2026-11-18 16:56] BUNDLE: NOTEBOOK_BUNDLE.md (380 lines scanned, +49 XP, +6 Python)`
+- `[2026-11-18 16:56] COMMIT: feat: Dynamic XP scaling, mythos commit, and NotebookLM bundle (5f/706L, +80 XP, +12 Git)`
+- `[2026-11-18 17:02] QUEST COMPLETED: Build NotebookLM Source Bundler (+46 XP, +9 Python)`
+- `[2026-11-18 17:02] QUEST SET: Push mythos-core to GitHub Remote`
+- `[2026-11-18 19:14] PRUNED LOG: Removed 4 entries (kept 5, +20 XP, +2 Linux/CLI)`
+- `[2026-11-18 19:18] BUNDLE: NOTEBOOK_BUNDLE.md (395 lines scanned, +49 XP, +6 Python)`
 
 
 ---
@@ -43,8 +46,8 @@
 ```json
 {
     "player": "Alexander the Grey",
-    "level": 3,
-    "active_quest": "Build NotebookLM Source Bundler",
+    "level": 5,
+    "active_quest": "Push mythos-core to GitHub Remote",
     "inventory": [
         "Python 3.13.5",
         "Bash Shell",
@@ -53,20 +56,23 @@
         "Git v2.47.3"
     ],
     "history": [
-        "[2026-11-17 18:32] QUEST SET: Automate Local Knowledge Pipeline",
-        "[2026-11-18 16:20] ITEM ACQUIRED: Global Shell Alias (Lvl 2)",
-        "[2026-11-18 16:22] ITEM ACQUIRED: Git v2.47.3 (Lvl 3)",
-        "[2026-11-18 16:31] QUEST COMPLETED: Automate Local Knowledge Pipeline (+50 XP, +10 Python)",
-        "[2026-11-18 16:31] QUEST SET: Build NotebookLM Source Bundler"
+        "[2026-11-18 16:31] QUEST SET: Build NotebookLM Source Bundler",
+        "[2026-11-18 16:56] BUNDLE: NOTEBOOK_BUNDLE.md (380 lines scanned, +49 XP, +6 Python)",
+        "[2026-11-18 16:56] COMMIT: feat: Dynamic XP scaling, mythos commit, and NotebookLM bundle (5f/706L, +80 XP, +12 Git)",
+        "[2026-11-18 17:02] QUEST COMPLETED: Build NotebookLM Source Bundler (+46 XP, +9 Python)",
+        "[2026-11-18 17:02] QUEST SET: Push mythos-core to GitHub Remote",
+        "[2026-11-18 19:14] PRUNED LOG: Removed 4 entries (kept 5, +20 XP, +2 Linux/CLI)",
+        "[2026-11-18 19:18] BUNDLE: NOTEBOOK_BUNDLE.md (395 lines scanned, +49 XP, +6 Python)"
     ],
-    "xp": 50,
+    "xp": 94,
     "completed_quests": [
-        "Automate Local Knowledge Pipeline (2026-11-18 16:31)"
+        "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
+        "Build NotebookLM Source Bundler (2026-11-18 17:02)"
     ],
     "skills": {
-        "Python": 20,
-        "Linux/CLI": 10,
-        "Git": 5
+        "Python": 41,
+        "Linux/CLI": 12,
+        "Git": 17
     }
 }
 ```
@@ -87,6 +93,9 @@ STATE_FILE = os.path.join(BASE_DIR, "system_state.json")
 CODEX_FILE = os.path.join(BASE_DIR, "CODEX.md")
 BUNDLE_FILE = os.path.join(BASE_DIR, "NOTEBOOK_BUNDLE.md")
 XP_PER_LEVEL = 100
+
+
+from log_tools import calc_prune_xp, print_log
 
 
 def default_state():
@@ -317,7 +326,6 @@ def main():
         if len(sys.argv) > 3 and sys.argv[3].isdigit():
             skill = " ".join(sys.argv[2:-1]).strip()
             amount = int(sys.argv[-1])
-        else:
             skill = " ".join(sys.argv[2:]).strip()
         current_rank = state["skills"].get(skill, 0)
         # Diminishing returns at higher ranks, floor of 1 XP per point
@@ -380,17 +388,32 @@ def main():
         with open(BUNDLE_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(parts))
 
-        xp_gained, sk_gained, lvls = apply_xp(state, raw_xp, "Python", raw_skill)
+        nb_raw = max(1, raw_skill - 1) if raw_skill > 1 else raw_skill
+        py_raw = max(0, raw_skill - nb_raw)
+        xp_gained, nb_gained, lvls = apply_xp(state, raw_xp, "Notebook", nb_raw)
+        py_gained = 0
+        if py_raw > 0:
+            py_gained = max(1, int(round(py_raw)))
+            state["skills"]["Python"] = state["skills"].get("Python", 0) + py_gained
         state["history"].append(
-            f"[{timestamp}] BUNDLE: NOTEBOOK_BUNDLE.md ({total_lines} lines scanned, +{xp_gained} XP, +{sk_gained} Python)"
+            f"[{timestamp}] BUNDLE: NOTEBOOK_BUNDLE.md ({total_lines} lines scanned, +{xp_gained} XP, +{nb_gained} Notebook, +{py_gained} Python)"
         )
         save_state(state)
         lvl_note = f" | LEVEL UP -> {state['level']}" if lvls else ""
         print(
             f"[ BUNDLE CREATED ]: NOTEBOOK_BUNDLE.md ({total_lines} lines) | "
-            f"+{xp_gained} XP | +{sk_gained} Python{lvl_note}"
+            f"+{xp_gained} XP | +{nb_gained} Notebook | +{py_gained} Python{lvl_note}"
         )
 
+    elif cmd == "log":
+        arg = sys.argv[2].lower() if len(sys.argv) > 2 else "15"
+        print_log(state, show_all=(arg == "all"), limit=(int(arg) if arg.isdigit() and int(arg) > 0 else 15))
+    elif cmd == "prune":
+        keep = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() and int(sys.argv[2]) > 0 else 20
+        hist = state.get("history", [])
+        rem = max(0, len(hist) - keep)
+        if rem == 0: print(f"[ PRUNE SKIPPED ]: History has {len(hist)} entries (keep: {keep}).")
+        else: state["history"] = hist[-keep:]; rxp, rsk = calc_prune_xp(rem); xg, sg, _ = apply_xp(state, rxp, "Linux/CLI", rsk); state["history"].append(f"[{timestamp}] PRUNED LOG: Removed {rem} entries (kept {keep}, +{xg} XP, +{sg} Linux/CLI)"); save_state(state); print(f"[ LOG PRUNED ]: Removed {rem} entries (kept {keep}) | +{xg} XP | +{sg} Linux/CLI")
     else:
         print("Unknown command or missing arguments.")
         print_usage()

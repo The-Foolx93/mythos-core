@@ -11,6 +11,9 @@ BUNDLE_FILE = os.path.join(BASE_DIR, "NOTEBOOK_BUNDLE.md")
 XP_PER_LEVEL = 100
 
 
+from log_tools import calc_prune_xp, print_log
+
+
 def default_state():
     return {
         "player": "Alexander the Grey",
@@ -239,7 +242,6 @@ def main():
         if len(sys.argv) > 3 and sys.argv[3].isdigit():
             skill = " ".join(sys.argv[2:-1]).strip()
             amount = int(sys.argv[-1])
-        else:
             skill = " ".join(sys.argv[2:]).strip()
         current_rank = state["skills"].get(skill, 0)
         # Diminishing returns at higher ranks, floor of 1 XP per point
@@ -302,17 +304,32 @@ def main():
         with open(BUNDLE_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(parts))
 
-        xp_gained, sk_gained, lvls = apply_xp(state, raw_xp, "Python", raw_skill)
+        nb_raw = max(1, raw_skill - 1) if raw_skill > 1 else raw_skill
+        py_raw = max(0, raw_skill - nb_raw)
+        xp_gained, nb_gained, lvls = apply_xp(state, raw_xp, "Notebook", nb_raw)
+        py_gained = 0
+        if py_raw > 0:
+            py_gained = max(1, int(round(py_raw)))
+            state["skills"]["Python"] = state["skills"].get("Python", 0) + py_gained
         state["history"].append(
-            f"[{timestamp}] BUNDLE: NOTEBOOK_BUNDLE.md ({total_lines} lines scanned, +{xp_gained} XP, +{sk_gained} Python)"
+            f"[{timestamp}] BUNDLE: NOTEBOOK_BUNDLE.md ({total_lines} lines scanned, +{xp_gained} XP, +{nb_gained} Notebook, +{py_gained} Python)"
         )
         save_state(state)
         lvl_note = f" | LEVEL UP -> {state['level']}" if lvls else ""
         print(
             f"[ BUNDLE CREATED ]: NOTEBOOK_BUNDLE.md ({total_lines} lines) | "
-            f"+{xp_gained} XP | +{sk_gained} Python{lvl_note}"
+            f"+{xp_gained} XP | +{nb_gained} Notebook | +{py_gained} Python{lvl_note}"
         )
 
+    elif cmd == "log":
+        arg = sys.argv[2].lower() if len(sys.argv) > 2 else "15"
+        print_log(state, show_all=(arg == "all"), limit=(int(arg) if arg.isdigit() and int(arg) > 0 else 15))
+    elif cmd == "prune":
+        keep = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() and int(sys.argv[2]) > 0 else 20
+        hist = state.get("history", [])
+        rem = max(0, len(hist) - keep)
+        if rem == 0: print(f"[ PRUNE SKIPPED ]: History has {len(hist)} entries (keep: {keep}).")
+        else: state["history"] = hist[-keep:]; rxp, rsk = calc_prune_xp(rem); xg, sg, _ = apply_xp(state, rxp, "Linux/CLI", rsk); state["history"].append(f"[{timestamp}] PRUNED LOG: Removed {rem} entries (kept {keep}, +{xg} XP, +{sg} Linux/CLI)"); save_state(state); print(f"[ LOG PRUNED ]: Removed {rem} entries (kept {keep}) | +{xg} XP | +{sg} Linux/CLI")
     else:
         print("Unknown command or missing arguments.")
         print_usage()
