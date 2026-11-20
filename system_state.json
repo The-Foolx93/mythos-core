@@ -52,9 +52,10 @@
         "[2026-11-19 16:06] COMMIT: fix(ui): align box borders and wrap long status lines (3f/84L, +53 XP, +8 Git)",
         "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (512 lines scanned, +55 XP, +7 Notebook, +1 Python)",
         "[2026-11-19 16:06] COMMIT: fix(ui): align box borders and wrap long status lines (3f/62L, +45 XP, +7 Git)",
-        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (514 lines scanned, +55 XP, +7 Notebook, +1 Python)"
+        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (514 lines scanned, +55 XP, +7 Notebook, +1 Python)",
+        "[2026-11-19 16:06] COMMIT: feat(state): boost Git skill and reach Level 11 (3f/54L, +43 XP, +7 Git)"
     ],
-    "xp": 14,
+    "xp": 57,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
@@ -66,7 +67,7 @@
     "skills": {
         "Python": 78,
         "Linux/CLI": 12,
-        "Git": 128,
+        "Git": 135,
         "Notebook": 74,
         "Git 10": 10,
         "[skill_name]": 9
