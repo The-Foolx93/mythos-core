@@ -1,6 +1,6 @@
 {
     "player": "Alexander the Grey",
-    "level": 20,
+    "level": 21,
     "active_quest": "None",
     "inventory": [
         "Python 3.13.5",
@@ -50,7 +50,9 @@
         "[2026-11-19 16:06] QUEST COMPLETED: Upgrade mythos-core UI with ANSI colors and box-drawing (+62 XP, +13 Python)",
         "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (510 lines scanned, +55 XP, +7 Notebook, +1 Python)",
         "[2026-11-19 16:06] COMMIT: fix(ui): align box borders and wrap long status lines (3f/84L, +53 XP, +8 Git)",
-        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (512 lines scanned, +55 XP, +7 Notebook, +1 Python)"
+        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (512 lines scanned, +55 XP, +7 Notebook, +1 Python)",
+        "[2026-11-19 16:06] COMMIT: fix(ui): align box borders and wrap long status lines (3f/62L, +45 XP, +7 Git)",
+        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (514 lines scanned, +55 XP, +7 Notebook, +1 Python)"
     ],
     "xp": 14,
     "completed_quests": [
@@ -62,10 +64,10 @@
         "Upgrade mythos-core UI with ANSI colors and box-drawing (2026-11-19 16:06)"
     ],
     "skills": {
-        "Python": 77,
+        "Python": 78,
         "Linux/CLI": 12,
-        "Git": 121,
-        "Notebook": 67,
+        "Git": 128,
+        "Notebook": 74,
         "Git 10": 10,
         "[skill_name]": 9
     }
