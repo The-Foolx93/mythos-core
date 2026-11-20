@@ -42,9 +42,10 @@
         "[2026-11-19 16:06] COMMIT: chore: complete github push quest and set next quest (3f/100L, +58 XP, +9 Git)",
         "[2026-11-19 16:06] QUEST SET: Upgrade mythos-core UI and status presentation",
         "[2026-11-19 16:06] QUEST SET: Upgrade mythos-core UI with ANSI colors and box-drawing",
-        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (502 lines scanned, +55 XP, +7 Notebook, +1 Python)"
+        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (502 lines scanned, +55 XP, +7 Notebook, +1 Python)",
+        "[2026-11-19 16:06] COMMIT: feat(ui): add ANSI styling, XP bar, and box-drawing status view (3f/80L, +51 XP, +8 Git)"
     ],
-    "xp": 13,
+    "xp": 64,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
@@ -55,7 +56,7 @@
     "skills": {
         "Python": 61,
         "Linux/CLI": 12,
-        "Git": 94,
+        "Git": 102,
         "Notebook": 46,
         "Git 10": 10,
         "[skill_name]": 9
