@@ -1,6 +1,6 @@
 {
     "player": "Alexander the Grey",
-    "level": 13,
+    "level": 15,
     "active_quest": "None",
     "inventory": [
         "Python 3.13.5",
@@ -35,9 +35,12 @@
         "[2026-11-19 16:05] COMMIT: chore: sync codex and system state before push (2f/15L, +25 XP, +4 Git)",
         "[2026-11-19 16:06] QUEST SET: <new_quest>",
         "[2026-11-19 16:06] QUEST COMPLETED: <new_quest> (+34 XP, +6 [skill_name])",
-        "[2026-11-19 16:06] ITEM ACQUIRED: <new_item> (+29 XP, +3 [skill_name])"
+        "[2026-11-19 16:06] ITEM ACQUIRED: <new_item> (+29 XP, +3 [skill_name])",
+        "[2026-11-19 16:06] COMMIT: <commit_message> (4f/41L, +43 XP, +7 Git)",
+        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (497 lines scanned, +54 XP, +7 Notebook, +1 Python)",
+        "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (498 lines scanned, +54 XP, +7 Notebook, +1 Python)"
     ],
-    "xp": 49,
+    "xp": 0,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
@@ -46,10 +49,10 @@
         "<new_quest> (2026-11-19 16:06)"
     ],
     "skills": {
-        "Python": 58,
+        "Python": 60,
         "Linux/CLI": 12,
-        "Git": 78,
-        "Notebook": 25,
+        "Git": 85,
+        "Notebook": 39,
         "Git 10": 10,
         "[skill_name]": 9
     }
