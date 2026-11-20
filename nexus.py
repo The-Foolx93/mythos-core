@@ -1,4 +1,5 @@
 import json
+import curses
 import os
 import re
 import subprocess
@@ -218,6 +219,16 @@ def print_status(state):
 
 
 
+def skill_tier(pts):
+    pts=int(pts)
+    if pts>=150: return "T5:Sovereign"
+    if pts>=100: return "T4:Vanguard"
+    if pts>=50: return "T3:Specialist"
+    if pts>=25: return "T2:Adept"
+    return "T1:Initiate"
+
+from tui_helper import run_tui
+
 def print_usage():
     print("Usage:")
     print("  mythos status")
@@ -242,6 +253,8 @@ def main():
 
     if cmd == "status":
         print_status(state)
+    elif cmd == "ui":
+        run_tui(state)
 
     elif cmd == "quest" and len(sys.argv) > 2:
         new_quest = " ".join(sys.argv[2:]).strip()

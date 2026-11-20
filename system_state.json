@@ -1,14 +1,13 @@
 {
     "player": "Alexander the Grey",
     "level": 21,
-    "active_quest": "None",
+    "active_quest": "Build interactive curses TUI dashboard (mythos ui)",
     "inventory": [
         "Python 3.13.5",
         "Bash Shell",
         "Markdown Codex",
         "Global Shell Alias",
-        "Git v2.47.3",
-        "<new_item>"
+        "Git v2.47.3"
     ],
     "history": [
         "[2026-11-18 16:31] QUEST SET: Build NotebookLM Source Bundler",
@@ -53,9 +52,14 @@
         "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (512 lines scanned, +55 XP, +7 Notebook, +1 Python)",
         "[2026-11-19 16:06] COMMIT: fix(ui): align box borders and wrap long status lines (3f/62L, +45 XP, +7 Git)",
         "[2026-11-19 16:06] BUNDLE: NOTEBOOK_BUNDLE.md (514 lines scanned, +55 XP, +7 Notebook, +1 Python)",
-        "[2026-11-19 16:06] COMMIT: feat(state): boost Git skill and reach Level 11 (3f/54L, +43 XP, +7 Git)"
+        "[2026-11-19 16:06] COMMIT: feat(state): boost Git skill and reach Level 11 (3f/54L, +43 XP, +7 Git)",
+        "[2026-11-19 16:06] COMMIT: feat(state): boost Git skill and reach Level 11 (2f/13L, +24 XP, +4 Git)",
+        "[2026-11-19 16:06] QUEST SET: Build interactive curses TUI dashboard (mythos ui)",
+        "[2026-11-19 16:07] QUEST QUEUED: Add dynamic width, multi-panel layout, and MythOS/Infern-OS theme toggle to status UI",
+        "[2026-11-19 16:07] QUEST QUEUED: Clean up system_state.json (merge Git 10 into Git) and resolve post-commit dirty loop",
+        "[2026-11-19 17:22] SEC/BACKUP CHECK: Backed up state & codex to /tmp/mythos-backup (+15 XP, +2 Linux/CLI)"
     ],
-    "xp": 57,
+    "xp": 96,
     "completed_quests": [
         "Automate Local Knowledge Pipeline (2026-11-18 16:31)",
         "Build NotebookLM Source Bundler (2026-11-18 17:02)",
@@ -66,10 +70,8 @@
     ],
     "skills": {
         "Python": 78,
-        "Linux/CLI": 12,
-        "Git": 135,
-        "Notebook": 74,
-        "Git 10": 10,
-        "[skill_name]": 9
+        "Linux/CLI": 14,
+        "Git": 149,
+        "Notebook": 74
     }
 }
